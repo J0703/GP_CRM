@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -6,6 +7,53 @@
 <title>无标题文档</title>
 <link href="${pageContext.request.contextPath}/css/sys.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/Calendar.js"></script>
+	<script src="/JQ3.2.1.js"></script>
+	<script>
+		function createXMLHttpRequest() {
+			try {
+				return new XMLHttpRequest();
+			} catch (e) {
+				try {
+					return new ActiveXObject("Msxml2.HTTP");
+				} catch (e) {
+					try {
+						return new ActiveXObject("Microsoft.HTTP");
+					} catch (e) {
+						throw e;
+					}
+				}
+			}
+		}
+		function showPost(obj) {
+			// 获取选中部门
+			var depID = obj.value;
+			//1,获得XMLHttpRequest对象
+			var xmlHttp = createXMLHttpRequest();
+			//2,打开连接
+			var url = "${pageContext.request.contextPath}/showPost.action";
+
+			xmlHttp.open("POST", url, true);
+			//3,设置请求头
+			xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			//4,发出请求时,给出请求体
+			xmlHttp.send("depID=" + depID);
+			//5,给xmlHttp对象的onreadystatechange事件注册监听
+			xmlHttp.onreadystatechange = function () {
+				if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+					// 获取返回的 json 数据
+					var jsonData = eval("(" + xmlHttp.responseText + ")");
+
+					// 显示到 select 的 option 中
+					var selectE = document.getElementById("post");
+					selectE.innerHTML = "<option value='-1'>----请选择----</option>";
+					for (var i = 0; i < jsonData.length; i++) {
+						var postObj = jsonData[i];
+						selectE.innerHTML += "<option value='" + postObj.postID + "'>" + postObj.postName + "</option>";
+					}
+				}
+			};
+		}
+	</script>
 </head>
 
 <body class="emp_body">
@@ -33,55 +81,63 @@
   </tr>
 </table>
 
-<form action="/crm2/staff/staffAction_edit.action" method="post">
+<form action="${pageContext.request.contextPath}/updateStaff.action?staffID=${staff.staffID}" method="post">
 	
 	<input type="hidden" name="staffId" value="2c9091c14c78e58b014c78e7ecd90007"/>
 	
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	 <tr>
 	    <td>登录名：</td>
-	    <td><input type="text" name="loginName" value="赵六" /> </td>
+	    <td><input type="text" name="loginName" value="${staff.loginName}" /> </td>
 	    <td>密码：</td>
-	    <td><input type="password" name="loginPwd" value="54dfc11c8e9c49bab6068f473f913be9" /> </td>
+	    <td><input type="password" name="loginPwd" value="${staff.loginPwd}" /> </td>
 	  </tr>
 	 <tr>
 	    <td>姓名：</td>
-	    <td><input type="text" name="staffName" value="赵六" /> </td>
+	    <td><input type="text" name="staffName" value="${staff.staffName}" /> </td>
 	    <td>性别：</td>
 	    <td>
-	    	<input type="radio" name="gender" checked="checked" value="男"/>男
-	    	<input type="radio" name="gender" value="女"/>女
+
+				<input type="radio" name="gender" checked="checked" value="男"/>男
+			<input type="radio" name="gender" value="女"/>女
+
+
 	    </td>
 	  </tr>
 	 <tr>
-	    <td width="10%">所属部门：</td>
+	    <td width="13%">所属部门：</td>
 	    <td width="20%">
-	    	<select name="crmPost.crmDepartment.depId"  onchange="changePost(this)">
-			    <option value="">----请--选--择----</option>
-			    <option value="ee050687bd1a4455a153d7bbb7000001" selected="selected">教学部</option>
-			    <option value="ee050687bd1a4455a153d7bbb7000002">咨询部</option>
+	    	<select name="depID" id="depart" onchange="showPost(this)">
+				<option value="-1">---请选择---</option>
+				<c:forEach var="dep" items="${departments}">
+					<option value="${dep.depID}"
+							<c:if test="${staff.post.department.depID==dep.depID}">
+								selected="selected"
+							</c:if>>${dep.depName}</option>
+				</c:forEach>
 			</select>
 
 	    </td>
 	    <td width="8%">职务：</td>
 	    <td width="62%">
-	    	<select name="crmPost.postID" id="postSelectId">
-			    <option value="">----请--选--择----</option>
-			    <option value="2c9091c14c78e58b014c78e6b34a0003">总监</option>
-			    <option value="2c9091c14c78e58b014c78e6d4510004" selected="selected">讲师</option>
+	    	<select name="postID" id="post">
+			    <option value="-1">----请选择----</option>
+				<option selected="selected" value="${staff.post.postID}">${staff.post.postName}</option>
 			</select>
 	    </td>
 	  </tr>
 	  <tr>
-	    <td width="10%">入职时间：</td>
+	    <td width="13%">入职时间：</td>
 	    <td width="20%">
-	    	<input type="text" name="onDutyDate" value="2012-02-12" readonly="readonly" onfocus="c.showMoreDay=true; c.show(this);"/>
+	    	<input type="text" name="onDutyDate" value="${staff.onDutyDate}" readonly="readonly" onfocus="c.showMoreDay=true; c.show(this);"/>
 	    </td>
 	    <td width="8%"></td>
 	    <td width="62%"></td>
 	  </tr>
 	</table>
 </form>
+
+
 
 </body>
 </html>

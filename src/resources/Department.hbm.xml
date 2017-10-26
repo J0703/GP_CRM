@@ -9,12 +9,11 @@
         <property name="depName"/>
 
         <!--一对多单向关联-->
-        <set name="posts"
-            inverse="false"
-            lazy="false"
-            cascade="all">
-            <key column="depID"></key>
-            <one-to-many class="com.lanou.domain.HR.Post"/>
-        </set>
+        <!--<set name="posts"-->
+             <!--lazy="false"-->
+            <!--cascade="all">-->
+            <!--<key column="depID"></key>-->
+            <!--<one-to-many class="com.lanou.domain.HR.Post"/>-->
+        <!--</set>-->
     </class>
 </hibernate-mapping>

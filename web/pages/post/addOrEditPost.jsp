@@ -1,3 +1,5 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -6,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>无标题文档</title>
 <link href="${pageContext.request.contextPath}/css/sys.css" type="text/css" rel="stylesheet" />
-
+<script src="/JQ3.2.1.js"></script>
 </head>
 
 <body class="emp_body">
@@ -34,35 +36,28 @@
   </tr>
 </table>
 
-<form action="${pageContext.request.contextPath}/pages/post/listPost.jsp" method="post">
+<form action="${pageContext.request.contextPath}/updatePost.action?postID=${post.postID}" method="post">
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	 <tr>
+
 	    <td>选择部门：</td>
-	    <td><select name="depID" id="depart">
-		    <option value="-1">----请选择----</option>
-		    <option value="ee050687bd1a4455a153d7bbb7000001" selected="selected">${post.department.depName}</option>
-        </select>
-  </td>
+	    <td>
+            <select name="depID" id="depart">
+		      <option value="-1">---请选择---</option>
+                <c:forEach var="dep" items="${departments}">
+                    <option value="${dep.depID}"
+                            <c:if test="${post.department.depID==dep.depID}">
+                                selected="selected"
+                            </c:if>>${dep.depName}</option>
+                </c:forEach>
+             </select>
+         </td>
 	    <td>职务：</td>
-	    <td><input type="text" name="postName" value="${post.postName}"/> </td>
+         <td>
+             <input type="text" name="postName" value="${post.postName}"/> </td>
 	  </tr>
 	</table>
 </form>
-<script>
-    $(function () {
-        $.post("${pageContext.request.contextPath}/showDepartment.action",
-                null,
-                function (data) {
-                    var _html ="<option value='-1'>---请选择---</option>";
-                    $.each(data, function (index, value) {
-                        _html += '<option value="' + value.depID + '">' + value.depName+ '</option>'
-                    });
 
-                    $("#depart").html(_html);
-                },
-                "json");
-    });
-
-</script>
 </body>
 </html>

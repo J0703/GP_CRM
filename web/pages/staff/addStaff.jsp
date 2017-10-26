@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -6,7 +7,51 @@
 <title>无标题文档</title>
 <link href="${pageContext.request.contextPath}/css/sys.css" type="text/css" rel="stylesheet" />
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/Calendar.js"></script>
+<script>
+	function createXMLHttpRequest() {
+		try {
+			return new XMLHttpRequest();
+		} catch (e) {
+			try {
+				return new ActiveXObject("Msxml2.HTTP");
+			} catch (e) {
+				try {
+					return new ActiveXObject("Microsoft.HTTP");
+				} catch (e) {
+					throw e;
+				}
+			}
+		}
+	}
+	function showPost(obj) {
+		// 获取选中部门
+		var depID = obj.value;
+		//1,获得XMLHttpRequest对象
+		var xmlHttp = createXMLHttpRequest();
+		//2,打开连接
+		var url = "${pageContext.request.contextPath}/showPost.action";
+		xmlHttp.open("POST", url, true);
+		//3,设置请求头
+		xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		//4,发出请求时,给出请求体
+		xmlHttp.send("depID=" + depID);
+		//5,给xmlHttp对象的onreadystatechange事件注册监听
+		xmlHttp.onreadystatechange = function () {
+			if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+				// 获取返回的 json 数据
+				var jsonData = eval("(" + xmlHttp.responseText + ")");
 
+				// 显示到 select 的 option 中
+				var selectE = document.getElementById("post");
+				selectE.innerHTML = "<option value='-1'>----请选择----</option>";
+				for (var i = 0; i < jsonData.length; i++) {
+					var postObj = jsonData[i];
+					selectE.innerHTML += "<option value='" + postObj.postID + "'>" + postObj.postName + "</option>";
+				}
+			}
+		};
+	}
+</script>
 </head>
 
 <body class="emp_body">
@@ -34,7 +79,7 @@
   </tr>
 </table>
 
-<form action="${pageContext.request.contextPath}/pages/staff/listStaff.jsp" method="post">
+<form action="${pageContext.request.contextPath}/addStaff.action" method="post">
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	 <tr>
 	    <td>登录名：</td>
@@ -53,17 +98,18 @@
 	 <tr>
 	    <td width="10%">所属部门：</td>
 	    <td width="20%">
-	    	<select name="crmPost.crmDepartment.depId"onchange="changePost(this)">
-			    <option value="">----请--选--择----</option>
-			    <option value="ee050687bd1a4455a153d7bbb7000001">教学部</option>
-			    <option value="ee050687bd1a4455a153d7bbb7000002">咨询部</option>
+	    	<select name="depID" id="depart" onchange="showPost(this)">
+			    <option value="-1">----请选择----</option>
+			   <s:iterator var="dep" value="departments">
+				   <option value="${dep.depID}">${dep.depName}</option>
+			   </s:iterator>
 			</select>
 
 	    </td>
 	    <td width="8%">职务：</td>
 	    <td width="62%">
-	    	<select id="postSelectId" name="crmPost.postID">
-	    		<option>----请--选--择----</option>
+	    	<select id="post" name="postID">
+	    		<option value="-1">----请选择----</option>
 	    	</select>
 	    </td>
 	  </tr>

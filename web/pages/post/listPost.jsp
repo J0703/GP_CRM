@@ -27,7 +27,7 @@
 
         <td width="57%" align="right">
             <%--添加职务 --%>
-            <a href="${pageContext.request.contextPath}/pages/post/addOrEditPost.jsp">
+            <a href="${pageContext.request.contextPath}/BeforeUpdatePost.action">
                 <img src="${pageContext.request.contextPath}/images/button/tianjia.gif"/>
             </a>
 

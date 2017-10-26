@@ -13,4 +13,8 @@ public interface PostService {
     List<Post> findPostById(int depID);
 
     Post findById(int postID);
+
+    void save(Post post);
+
+    void update(Post post);
 }

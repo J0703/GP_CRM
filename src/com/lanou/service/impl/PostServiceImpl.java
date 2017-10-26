@@ -40,6 +40,16 @@ public class PostServiceImpl implements PostService {
 
     }
 
+    @Override
+    public void save(Post post) {
+        postDao.save(post);
+    }
+
+    @Override
+    public void update(Post post) {
+        postDao.update(post);
+    }
+
     public PostServiceImpl(PostDao postDao) {
         this.postDao = postDao;
     }

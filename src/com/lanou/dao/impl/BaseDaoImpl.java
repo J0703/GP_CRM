@@ -31,7 +31,6 @@ public class BaseDaoImpl<T>  implements BaseDao<T> {
             }
         }
         List<T> tList = query.list();
-
         return tList;
     }
 
@@ -61,6 +60,14 @@ public class BaseDaoImpl<T>  implements BaseDao<T> {
     public void save(T t) {
         Session session =sessionFactory.getCurrentSession();
         session.save(t);
+
+    }
+
+    @Override
+    public void saveOrUpdate(T t) {
+        Session session = sessionFactory.getCurrentSession();
+        session.merge(t);
+        session.saveOrUpdate(t);
     }
 
 

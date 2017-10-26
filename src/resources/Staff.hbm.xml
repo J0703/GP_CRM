@@ -13,12 +13,13 @@
         <property name="onDutyDate"/>
 
         <!--n对1  多个员工对应一个部门-->
-        <many-to-one name="department"
-                     lazy="false"
-                     column="depID"
-                     cascade="save-update"/>
+        <!--<many-to-one name="department"-->
+                     <!--lazy="false"-->
+                     <!--column="depID"-->
+                     <!--cascade="save-update"/>-->
 
         <!--多个员工对应一个职务-->
+
         <many-to-one name="post"
                      lazy="false"
                      column="postID"

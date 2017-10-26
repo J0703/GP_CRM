@@ -20,6 +20,17 @@ public class Post {
     public Post() {
     }
 
+    public Post(String postName, Department department) {
+        this.postName = postName;
+        this.department = department;
+    }
+
+    public Post(int postID, String postName, Department department) {
+        this.postID = postID;
+        this.postName = postName;
+        this.department = department;
+    }
+
     @Override
     public String toString() {
         return "Post{" +
