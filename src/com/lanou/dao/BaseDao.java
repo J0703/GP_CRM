@@ -39,4 +39,6 @@ public interface BaseDao<T> {
     void save(T t);
     void saveOrUpdate(T t);
 
+    void delete(T t);
+
 }

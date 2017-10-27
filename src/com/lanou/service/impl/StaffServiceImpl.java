@@ -1,11 +1,9 @@
 package com.lanou.service.impl;
 
 import com.lanou.dao.StaffDao;
-import com.lanou.domain.HR.Post;
-import com.lanou.domain.HR.Staff;
+import com.lanou.domain.hr.Staff;
 import com.lanou.service.StaffService;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +27,7 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public Staff findById(int staffID) {
+    public Staff findById(String staffID) {
         return staffDao.findById(staffID,Staff.class);
 
     }
@@ -47,6 +45,12 @@ public class StaffServiceImpl implements StaffService {
     @Override
     public void update(Staff staff) {
         staffDao.update(staff);
+    }
+
+    @Override
+    public List<Staff> login(String loginName, String loginPwd) {
+       return staffDao.login(loginName,loginPwd);
+
     }
 
 

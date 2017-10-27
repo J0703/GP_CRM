@@ -83,7 +83,7 @@
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	 <tr>
 	    <td>登录名：</td>
-	    <td><input type="text" name="loginName" value="" /> </td>
+	    <td><input type="text" name="loginName" value=""/> </td>
 	    <td>密码：</td>
 	    <td><input type="password" name="loginPwd" /> </td>
 	  </tr>

@@ -33,7 +33,7 @@
 </head>
 
 <body class="updpwd">
-	<form action="/crm2/staff/staffAction_editPassword.action" method="post">
+	<form action="/crm2/staff/editPassword.action" method="post">
 		<table style="width: 200px">
 			<tr>
 				<td colspan="2">

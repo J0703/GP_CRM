@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <HTML><HEAD>
@@ -96,7 +97,10 @@
 								<tr>
 									<td width="51" valign="middle">
 										<font color="#FFFFFF">
-											欢迎您：${loginName}
+
+											欢迎您：
+											${name}
+											<s:property value="#session.name"/>
 										</font>
 									</td>
 								</tr>

@@ -98,8 +98,8 @@
 	    <td>性别：</td>
 	    <td>
 
-				<input type="radio" name="gender" checked="checked" value="男"/>男
-			<input type="radio" name="gender" value="女"/>女
+				<input type="radio" name="gender"<c:if test="${staff.gender eq '男'}">checked="checked"</c:if> value="男"/>男
+			<input type="radio" name="gender" <c:if test="${staff.gender eq '女'}">checked="checked"</c:if> value="女"/>女
 
 
 	    </td>

@@ -2,18 +2,19 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.lanou.domain.HR.Department">
+    <class name="com.lanou.domain.hr.Department">
         <id name="depID">
-            <generator class="native"/>
+            <generator class="uuid"/>
         </id>
         <property name="depName"/>
 
         <!--一对多单向关联-->
-        <!--<set name="posts"-->
-             <!--lazy="false"-->
-            <!--cascade="all">-->
-            <!--<key column="depID"></key>-->
-            <!--<one-to-many class="com.lanou.domain.HR.Post"/>-->
-        <!--</set>-->
+        <set name="posts"
+             lazy="false"
+             inverse="true"
+            cascade="save-update">
+            <key column="depID"></key>
+            <one-to-many class="com.lanou.domain.hr.Post"/>
+        </set>
     </class>
 </hibernate-mapping>

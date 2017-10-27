@@ -50,7 +50,7 @@
         <tr class="tabtd1">
             <td align="center">${depart.depName}</td>
             <td width="7%" align="center">
-                <a href="${pageContext.request.contextPath}/BeforeUpdateDepName.action?depID=${depart.depID}"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>
+                <a href="${pageContext.request.contextPath}/beforeUpdateDepName.action?depID=${depart.depID}"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>
             </td>
         </tr>
     </s:iterator>

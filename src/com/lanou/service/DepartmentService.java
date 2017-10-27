@@ -1,7 +1,6 @@
 package com.lanou.service;
 
-import com.lanou.domain.HR.Department;
-import com.lanou.domain.HR.Post;
+import com.lanou.domain.hr.Department;
 
 import java.util.List;
 
@@ -11,9 +10,11 @@ import java.util.List;
 public interface DepartmentService {
     List<Department> findAll();
 
-    Department findById(int depID);
+    Department findById(String depID);
 
     void update(Department department);
 
     void save(Department department);
+
+    void saveOrUpdate(Department department);
 }

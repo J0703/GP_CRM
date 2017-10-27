@@ -1,6 +1,7 @@
 package com.lanou.dao;
 
-import com.lanou.domain.HR.Staff;
+import com.lanou.dao.BaseDao;
+import com.lanou.domain.hr.Staff;
 
 import java.util.List;
 import java.util.Map;
@@ -10,4 +11,6 @@ import java.util.Map;
  */
 public interface StaffDao extends BaseDao<Staff> {
     List<Staff> findStaff(Map<String, Object> params);
+
+    List<Staff> login(String loginName, String loginPwd);
 }

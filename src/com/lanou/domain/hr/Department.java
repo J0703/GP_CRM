@@ -1,4 +1,4 @@
-package com.lanou.domain.HR;
+package com.lanou.domain.hr;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -7,21 +7,22 @@ import java.util.Set;
  * Created by dllo on 17/10/24.
  */
 public class Department {
-    private int depID;
+    private String depID;
     private String depName;
-    private Set<Post> posts = new HashSet<>();
+    private Set<Post> posts= new HashSet<>();
+
 
     public Department(String depName) {
         this.depName = depName;
     }
 
-    public Department(int depID, String depName) {
+    public Department(String depID, String depName) {
 
         this.depID = depID;
         this.depName = depName;
     }
 
-    public Department(int depID, String depName, Set<Post> posts) {
+    public Department(String depID, String depName, Set<Post> posts) {
         this.depID = depID;
         this.depName = depName;
         this.posts = posts;
@@ -30,20 +31,19 @@ public class Department {
     @Override
     public String toString() {
         return "Department{" +
-                "depID=" + depID +
+                "depID='" + depID + '\'' +
                 ", depName='" + depName + '\'' +
-                ", posts=" + posts +
                 '}';
     }
 
     public Department() {
     }
 
-    public int getDepID() {
+    public String getDepID() {
         return depID;
     }
 
-    public void setDepID(int depID) {
+    public void setDepID(String depID) {
         this.depID = depID;
     }
 

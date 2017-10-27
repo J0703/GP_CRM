@@ -1,7 +1,6 @@
 package com.lanou.service;
 
-import com.lanou.domain.HR.Post;
-import com.lanou.domain.HR.Staff;
+import com.lanou.domain.hr.Staff;
 
 import java.util.List;
 import java.util.Map;
@@ -14,7 +13,7 @@ public interface StaffService {
 
     List<Staff> findStaff(Map<String, Object> params);
 
-    Staff findById(int staffID);
+    Staff findById(String staffID);
 
     void save(Staff staff);
 
@@ -23,4 +22,6 @@ public interface StaffService {
 
 
     void update(Staff staff);
+
+    List<Staff> login(String loginName, String loginPwd);
 }

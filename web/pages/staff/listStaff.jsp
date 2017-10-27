@@ -81,15 +81,15 @@
     <td width="10%" align="center">编辑</td>
   </tr>
 
-	<s:iterator value="staffs" var="staff">
+	<s:iterator value="staffs" var="s">
 		<tr class="tabtd1">
-			<td align="center">${staff.staffName}</td>
-			<td align="center">${staff.gender}</td>
-			<td align="center">${staff.onDutyDate}</td>
-			<td align="center">${staff.post.department.depName}</td>
-			<td align="center">${staff.post.postName}</td>
+			<td align="center">${s.staffName}</td>
+			<td align="center">${s.gender}</td>
+			<td align="center">${s.onDutyDate}</td>
+			<td align="center">${s.post.department.depName}</td>
+			<td align="center">${s.post.postName}</td>
 			<td width="7%" align="center">
-				<a href="${pageContext.request.contextPath}/beforeUpdateStaff.action?staffID=${staff.staffID}"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
+				<a href="${pageContext.request.contextPath}/beforeUpdateStaff.action?staffID=${s.staffID}"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
 			</td>
 
 		</tr>

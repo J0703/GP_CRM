@@ -1,7 +1,7 @@
 package com.lanou.service.impl;
 
 import com.lanou.dao.PostDao;
-import com.lanou.domain.HR.Post;
+import com.lanou.domain.hr.Post;
 import com.lanou.service.PostService;
 
 import java.util.HashMap;
@@ -26,7 +26,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> findPostById(int depID) {
+    public List<Post> findPostById(String depID) {
         String hql = "from Post where depID=:id";
         Map<String,Object> params = new HashMap<>();
         params.put("id",depID);
@@ -35,7 +35,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post findById(int postID) {
+    public Post findById(String postID) {
        return postDao.findById(postID,Post.class);
 
     }
@@ -48,6 +48,12 @@ public class PostServiceImpl implements PostService {
     @Override
     public void update(Post post) {
         postDao.update(post);
+    }
+
+    @Override
+    public void saveOrUpdate(Post post) {
+
+        postDao.saveOrUpdate(post);
     }
 
     public PostServiceImpl(PostDao postDao) {

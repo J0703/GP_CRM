@@ -1,9 +1,7 @@
 package com.lanou.service.impl;
 
 import com.lanou.dao.DepartmentDao;
-import com.lanou.dao.PostDao;
-import com.lanou.domain.HR.Department;
-import com.lanou.domain.HR.Post;
+import com.lanou.domain.hr.Department;
 import com.lanou.service.DepartmentService;
 
 import java.util.List;
@@ -20,7 +18,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department findById(int depID) {
+    public Department findById(String depID) {
 
        return departmentDao.findById(depID,Department.class);
 
@@ -35,6 +33,11 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void save(Department department) {
         departmentDao.save(department);
+    }
+
+    @Override
+    public void saveOrUpdate(Department department) {
+        departmentDao.saveOrUpdate(department);
     }
 
 

@@ -36,7 +36,7 @@
   </tr>
 </table>
 
-<form action="${pageContext.request.contextPath}/updatePost.action?postID=${post.postID}" method="post">
+<form action="${pageContext.request.contextPath}/saveOrUpdatePost.action?postID=${post.postID}" method="post">
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	 <tr>
 

@@ -1,6 +1,6 @@
 package com.lanou.service;
 
-import com.lanou.domain.HR.Post;
+import com.lanou.domain.hr.Post;
 
 import java.util.List;
 
@@ -10,11 +10,13 @@ import java.util.List;
 public interface PostService {
     List<Post> findPost();
 
-    List<Post> findPostById(int depID);
+    List<Post> findPostById(String depID);
 
-    Post findById(int postID);
+    Post findById(String postID);
 
     void save(Post post);
 
     void update(Post post);
+
+    void saveOrUpdate(Post post);
 }

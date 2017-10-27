@@ -11,101 +11,135 @@
     <package name="CRM" extends="json-default">
         <!--登录-->
         <action name="login"
-                class="com.lanou.action.UserAction"
+                class="com.lanou.action.hr.StaffAction"
                 method="login">
-            <result name="success">/pages/frame.jsp</result>
+            <result name="success" type="redirect">/pages/frame.jsp</result>
             <result name="error">/pages/error.jsp</result>
             <result name="input">/pages/login.jsp</result>
+
         </action>
-        <!--所有部门-->
+        <!--刚进页面的所有部门显示-->
         <action name="findDepartment"
-                class="com.lanou.action.StaffAction"
+                class="com.lanou.action.hr.DepartmentAction"
                 method="findDepartment">
             <result name="success" >/pages/department/listDepartment.jsp</result>
         </action>
+
+        <!--刚进页面的所有职务显示-->
         <action name="findPost"
-                class="com.lanou.action.StaffAction"
+                class="com.lanou.action.hr.PostAction"
                 method="findPost">
             <result name="success">/pages/post/listPost.jsp</result>
         </action>
+
+        <!--刚进页面的所有员工显示-->
         <action name="findStaff"
-                class="com.lanou.action.StaffAction"
+                class="com.lanou.action.hr.StaffAction"
                 method="findStaff">
             <result name="success">/pages/staff/listStaff.jsp</result>
         </action>
+
+        <!--员工管理界面二级联动的部门-->
         <action name="showDepartment"
-                class="com.lanou.action.StaffAction"
-                method="showDepartment">
+                class="com.lanou.action.hr.DepartmentAction"
+                method="findDepartment">
             <result name="success" type="json">
                 <param name="root">departments</param>
             </result>
         </action>
-        <!--编辑职务页面的部门下拉列表-->
+
+        <!--编辑职务页面的部门下的拉列表-->
         <action name="selectDepartment"
-                class="com.lanou.action.StaffAction"
-                method="showDepartment">
+                class="com.lanou.action.hr.DepartmentAction"
+                method="findDepartment">
             <result name="success">/pages/post/addOrEditPost.jsp</result>
         </action>
+        <!--编辑职务页面的职务的下拉列表-->
         <action name="showPost"
-                class="com.lanou.action.StaffAction"
-                method="showPost">
+                class="com.lanou.action.hr.PostAction"
+                method="findPost">
             <result name="success" type="json">
                 <param name="root">posts</param>
             </result>
         </action>
+
+        <!--高级查询时显示员工列表-->
         <action name="showStaff"
-                class="com.lanou.action.StaffAction"
+                class="com.lanou.action.hr.StaffAction"
                 method="showStaff">
             <result name="success">/pages/staff/listStaff.jsp</result>
         </action>
-        <action name="BeforeUpdateDepName"
-                class="com.lanou.action.StaffAction"
-                method="BeforeUpdateDepName">
+
+        <!--编辑部门之前做的表单回显-->
+        <action name="beforeUpdateDepName"
+                class="com.lanou.action.hr.DepartmentAction"
+                method="beforeUpdateDepName">
             <result name="success">/pages/department/addOrEditDepartment.jsp</result>
         </action>
-        <action name="updateDepartment"
-                class="com.lanou.action.StaffAction"
-                method="updateDepartment">
+
+        <!--部门的编辑和保存-->
+        <action name="saveOrUpdate"
+                class="com.lanou.action.hr.DepartmentAction"
+                method="saveOrUpdate">
             <result name="success" type="chain">findDepartment</result>
         </action>
-        <action name="BeforeUpdatePost"
-                class="com.lanou.action.StaffAction"
-                method="BeforeUpdatePost">
+
+        <!--编辑职务之前做的表单回显-->
+        <action name="beforeUpdatePost"
+                class="com.lanou.action.hr.PostAction"
+                method="beforeUpdatePost">
             <result name="success" type="chain">selectDepartment</result>
         </action>
-        <action name="updatePost"
-                class="com.lanou.action.StaffAction"
-                method="updatePost">
+
+        <!--职务的编辑和保存-->
+        <action name="saveOrUpdatePost"
+                class="com.lanou.action.hr.PostAction"
+                method="saveOrUpdatePost">
             <result name="success" type="chain">findPost</result>
         </action>
+
+        <!--在编辑员工之前,要跳到部门的下拉列表中,,然后在调到编辑员工的界面-->
         <action name="beforeUpdateStaff"
-                class="com.lanou.action.StaffAction"
+                class="com.lanou.action.hr.StaffAction"
                 method="beforeUpdateStaff">
             <result name="success" type="chain">selectStaffDepartment</result>
         </action>
-        <!--编辑员工页面的部门下拉列表-->
+
+        <!--编辑员工页面的部门下拉列表,调到员工的编辑页面-->
         <action name="selectStaffDepartment"
-                class="com.lanou.action.StaffAction"
-                method="showDepartment">
+                class="com.lanou.action.hr.DepartmentAction"
+                method="findDepartment">
             <result name="success">/pages/staff/editStaff.jsp</result>
         </action>
+
+        <!--编辑员工-->
         <action name="updateStaff"
-                class="com.lanou.action.StaffAction"
+                class="com.lanou.action.hr.StaffAction"
                 method="updateStaff">
             <result name="success" type="chain">findStaff</result>
             <result name="input">pages/error.jsp</result>
         </action>
+
+        <!--添加员工时显示部门的下拉列表-->
         <action name="selectStaffDepartmentAdd"
-                class="com.lanou.action.StaffAction"
-                method="showDepartment">
+                class="com.lanou.action.hr.DepartmentAction"
+                method="findDepartment">
             <result name="success" >/pages/staff/addStaff.jsp</result>
         </action>
+
+        <!--添加员工提交表单走的action-->
         <action name="addStaff"
-                class="com.lanou.action.StaffAction"
+                class="com.lanou.action.hr.StaffAction"
                 method="addStaff">
             <result name="success" type="chain">findStaff</result>
         </action>
 
+        <!--重置密码-->
+        <action name="editPassword"
+                class="com.lanou.action.hr.StaffAction"
+                method="editPassword">
+            <result name="success">/pages/login.jsp</result>
+        </action>
 
     </package>
 </struts>

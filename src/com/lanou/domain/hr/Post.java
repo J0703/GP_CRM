@@ -1,14 +1,14 @@
-package com.lanou.domain.HR;
+package com.lanou.domain.hr;
 
 /**
  * Created by dllo on 17/10/24.
  */
 public class Post {
-    private int postID;
+    private String postID;
     private String postName;
     private Department department;
 
-    public Post(int postID, String postName) {
+    public Post(String postID, String postName) {
         this.postID = postID;
         this.postName = postName;
     }
@@ -25,7 +25,7 @@ public class Post {
         this.department = department;
     }
 
-    public Post(int postID, String postName, Department department) {
+    public Post(String postID, String postName, Department department) {
         this.postID = postID;
         this.postName = postName;
         this.department = department;
@@ -34,16 +34,17 @@ public class Post {
     @Override
     public String toString() {
         return "Post{" +
-                "postID=" + postID +
+                "postID='" + postID + '\'' +
                 ", postName='" + postName + '\'' +
+                ", department=" + department +
                 '}';
     }
 
-    public int getPostID() {
+    public String getPostID() {
         return postID;
     }
 
-    public void setPostID(int postID) {
+    public void setPostID(String postID) {
         this.postID = postID;
     }
 

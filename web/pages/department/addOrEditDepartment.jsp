@@ -34,7 +34,7 @@
   </tr>
 </table>
 
-<form action="${pageContext.request.contextPath}/updateDepartment.action?depID=${department.depID}" method="post">
+<form action="${pageContext.request.contextPath}/saveOrUpdate.action?depID=${department.depID}" method="post">
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	 <tr>
 	    <td>部门名称：</td>

@@ -2,9 +2,9 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="com.lanou.domain.HR.Post">
+    <class name="com.lanou.domain.hr.Post">
         <id name="postID">
-            <generator class="native"/>
+            <generator class="uuid"/>
         </id>
         <property name="postName"/>
 

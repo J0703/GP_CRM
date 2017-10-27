@@ -65,20 +65,8 @@
         <!--配置通知-->
         <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>
     </aop:config>
-    <!--配置user-->
-    <bean id="user"
-          class="com.lanou.domain.User">
-        <property name="id" value="1"/>
-        <property name="loginName" value="666"/>
-        <property name="password" value="666"/>
-    </bean>
-    <!--配置dao层-->
-    <bean id="userDao"
-          class="com.lanou.dao.impl.UserDaoImpl">
-        <!--给dao层实现类中的sessionFactory进行赋值-->
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
 
+    <!--配置dao层-->
     <bean id="departmentDao"
           class="com.lanou.dao.impl.DepartmentDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
@@ -95,11 +83,6 @@
     </bean>
 
     <!--配置service层-->
-    <bean id="userService"
-          class="com.lanou.service.impl.UserServiceImpl">
-        <property name="userDao" ref="userDao"/>
-    </bean>
-
     <bean id="departmentService"
           class="com.lanou.service.impl.DepartmentServiceImpl">
        <property name="departmentDao" ref="departmentDao"/>

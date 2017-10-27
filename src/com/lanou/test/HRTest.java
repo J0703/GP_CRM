@@ -1,9 +1,9 @@
 package com.lanou.test;
 
-import com.lanou.domain.HR.Department;
-import com.lanou.domain.HR.Post;
-import com.lanou.domain.HR.Staff;
-import com.lanou.domain.User;
+import com.lanou.domain.hr.Department;
+import com.lanou.domain.hr.Post;
+import com.lanou.domain.hr.Staff;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -14,11 +14,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by dllo on 17/10/24.
  */
-public class UserTest {
+public class HRTest {
 
     private ApplicationContext context;
 
@@ -29,15 +30,6 @@ public class UserTest {
 
     }
 
-    @Test
-    public void saveUser(){
-      SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
-        User user = (User) context.getBean("user");
-        session.save(user);
-        transaction.commit();
-    }
 
     @Test
     public void saveHR(){
@@ -45,18 +37,27 @@ public class UserTest {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
         Department department = new Department("教学部");
-        Post post = new Post("java讲师");
-        Post post1 = new Post("IOS讲师");
-        department.getPosts().add(post);
-        department.getPosts().add(post1);
         session.save(department);
 
         Department department1 = new Department("职规部");
-        Post post2 = new Post("职规主管");
-        Post post3 = new Post("班主任");
-        department1.getPosts().add(post2);
-        department1.getPosts().add(post3);
         session.save(department1);
+
+        Post post = new Post("java讲师");
+        post.setDepartment(department);
+        session.save(post);
+
+        Post post1 = new Post("IOS讲师");
+        post1.setDepartment(department);
+        session.save(post1);
+
+
+        Post post2 = new Post("职规主管");
+        post2.setDepartment(department1);
+        session.save(post2);
+
+        Post post3 = new Post("班主任");
+        post3.setDepartment(department1);
+        session.save(post3);
 
 
         Staff staff = new Staff("大师","123","吴大师","男",new Date());
@@ -91,4 +92,18 @@ public class UserTest {
 
         transaction.commit();
     }
+
+    @Test
+    public void findPost(){
+        SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
+        Session session = sessionFactory.getCurrentSession();
+        Transaction transaction = session.beginTransaction();
+        String hql = "from Post";
+        Query query = session.createQuery(hql);
+        List lists = query.list();
+
+        System.out.println(lists);
+        transaction.commit();
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.lanou.domain.HR;
+package com.lanou.domain.hr;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by dllo on 17/10/24.
  */
 public class Staff {
-    private int staffID;
+    private String staffID;
     private String loginName;
     private String loginPwd;
     private String staffName;
@@ -27,7 +27,7 @@ public class Staff {
         this.onDutyDate = onDutyDate;
     }
 
-    public Staff(int staffID, String loginName, String loginPwd, String staffName, String gender, Date onDutyDate, Department department, Post post) {
+    public Staff(String staffID, String loginName, String loginPwd, String staffName, String gender, Date onDutyDate, Department department, Post post) {
         this.staffID = staffID;
         this.loginName = loginName;
         this.loginPwd = loginPwd;
@@ -47,7 +47,7 @@ public class Staff {
         this.post = post;
     }
 
-    public Staff(int staffID, String loginName, String loginPwd, String staffName, String gender, Date onDutyDate) {
+    public Staff(String staffID, String loginName, String loginPwd, String staffName, String gender, Date onDutyDate) {
 
         this.staffID = staffID;
         this.loginName = loginName;
@@ -71,11 +71,11 @@ public class Staff {
                 '}';
     }
 
-    public int getStaffID() {
+    public String getStaffID() {
         return staffID;
     }
 
-    public void setStaffID(int staffID) {
+    public void setStaffID(String staffID) {
         this.staffID = staffID;
     }
 

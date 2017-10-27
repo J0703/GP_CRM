@@ -27,7 +27,7 @@
 
         <td width="57%" align="right">
             <%--添加职务 --%>
-            <a href="${pageContext.request.contextPath}/BeforeUpdatePost.action">
+            <a href="${pageContext.request.contextPath}/selectDepartment.action">
                 <img src="${pageContext.request.contextPath}/images/button/tianjia.gif"/>
             </a>
 
@@ -50,12 +50,12 @@
     </tr>
 
 
-    <s:iterator value="posts" var="post">
+    <s:iterator value="posts" var="p">
         <tr class="tabtd1">
-            <td align="center">${post.department.depName} </td>
-            <td align="center">${post.postName}</td>
+            <td align="center">${p.department.depName} </td>
+            <td align="center">${p.postName}</td>
             <td width="7%" align="center">
-                <a href="${pageContext.request.contextPath}/BeforeUpdatePost.action?postID=${post.postID}"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
+                <a href="${pageContext.request.contextPath}/beforeUpdatePost.action?postID=${p.postID}"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
             </td>
         </tr>
     </s:iterator>
