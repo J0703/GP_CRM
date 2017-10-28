@@ -1,6 +1,8 @@
 package com.lanou.service;
 
+import com.lanou.domain.hr.Post;
 import com.lanou.domain.hr.Staff;
+import com.lanou.util.PageBean;
 
 import java.util.List;
 import java.util.Map;
@@ -24,4 +26,6 @@ public interface StaffService {
     void update(Staff staff);
 
     List<Staff> login(String loginName, String loginPwd);
+
+    PageBean<Staff> findByPage(int pageNum, int pageSize);
 }

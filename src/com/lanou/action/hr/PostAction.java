@@ -3,6 +3,8 @@ import com.lanou.domain.hr.Department;
 import com.lanou.domain.hr.Post;
 import com.lanou.service.DepartmentService;
 import com.lanou.service.PostService;
+import com.lanou.util.PageBean;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,18 @@ public class PostAction extends ActionSupport implements ModelDriven<Post>{
     private String depID;
     private List<Post> posts;
 
+    private int pageNum = 1; //第一次从第一页开始
+    private int pageSize =3; //每页显示三条数据
+
+    /**
+     * 分页查职务
+     * @return
+     */
+    public String findByPage(){
+        PageBean<Post> pageBean = postService.findByPage(pageNum,pageSize);
+        ActionContext.getContext().put("pageBean",pageBean);
+        return SUCCESS;
+    }
     /**
      * 找到所有的职务
      * @return
@@ -90,5 +104,21 @@ public class PostAction extends ActionSupport implements ModelDriven<Post>{
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 }

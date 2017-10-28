@@ -1,6 +1,7 @@
 package com.lanou.service;
 
 import com.lanou.domain.hr.Post;
+import com.lanou.util.PageBean;
 
 import java.util.List;
 
@@ -19,4 +20,6 @@ public interface PostService {
     void update(Post post);
 
     void saveOrUpdate(Post post);
+
+    PageBean<Post> findByPage(int pageNum, int pageSize);
 }

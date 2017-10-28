@@ -3,6 +3,7 @@ package com.lanou.service.impl;
 import com.lanou.dao.PostDao;
 import com.lanou.domain.hr.Post;
 import com.lanou.service.PostService;
+import com.lanou.util.PageBean;
 
 import java.util.HashMap;
 import java.util.List;
@@ -54,6 +55,17 @@ public class PostServiceImpl implements PostService {
     public void saveOrUpdate(Post post) {
 
         postDao.saveOrUpdate(post);
+    }
+
+    @Override
+    public PageBean<Post> findByPage(int pageNum, int pageSize) {
+        String hql = "select count(*) from Post";
+        String hql1 = "from Post where 1=1";
+        int totalRecord = postDao.getTotalRecord(hql);
+        PageBean<Post> pageBean = new PageBean<>(pageNum,pageSize,totalRecord);
+        List<Post> data = postDao.findPageAll(hql1,pageBean.getStartIndex(),pageBean.getPageSize());
+        pageBean.setDate(data);
+        return pageBean;
     }
 
     public PostServiceImpl(PostDao postDao) {

@@ -1,8 +1,10 @@
 package com.lanou.service.impl;
 
 import com.lanou.dao.StaffDao;
+import com.lanou.domain.hr.Post;
 import com.lanou.domain.hr.Staff;
 import com.lanou.service.StaffService;
+import com.lanou.util.PageBean;
 
 import java.util.List;
 import java.util.Map;
@@ -51,6 +53,17 @@ public class StaffServiceImpl implements StaffService {
     public List<Staff> login(String loginName, String loginPwd) {
        return staffDao.login(loginName,loginPwd);
 
+    }
+
+    @Override
+    public PageBean<Staff> findByPage(int pageNum, int pageSize) {
+        String hql = "select count(*) from Staff";
+        String hql1 = "from Staff where 1=1";
+        int totalRecord = staffDao.getTotalRecord(hql);
+        PageBean<Staff> pageBean = new PageBean<>(pageNum,pageSize,totalRecord);
+        List<Staff> data = staffDao.findPageAll(hql1,pageBean.getStartIndex(),pageBean.getPageSize());
+        pageBean.setDate(data);
+        return pageBean;
     }
 
 

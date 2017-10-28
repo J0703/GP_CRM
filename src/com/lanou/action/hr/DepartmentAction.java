@@ -2,6 +2,8 @@ package com.lanou.action.hr;
 
 import com.lanou.domain.hr.Department;
 import com.lanou.service.DepartmentService;
+import com.lanou.util.PageBean;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,18 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
     private List<Department> departments;
     private String depID;
     private Department department;
+    private int pageNum = 1; //第一次从第一页开始
+    private int pageSize =3; //每页显示三条数据
 
+    /**
+     * 分页查部门
+     * @return
+     */
+    public String findByPage(){
+        PageBean<Department> pageBean = departmentService.findByPage(pageSize,pageNum);
+        ActionContext.getContext().put("pageBean",pageBean);
+        return SUCCESS;
+    }
     /**
      * 找到所有的部门
      * @return
@@ -87,6 +100,22 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
 

@@ -1,0 +1,14 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.lanou.domain.tr.Course">
+        <id name="courceTypeID">
+            <generator class="native"/>
+        </id>
+        <property name="courseCost"/>
+        <property name="total"/>
+        <property name="courseName"/>
+        <property name="remark"/>
+    </class>
+</hibernate-mapping>

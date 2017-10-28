@@ -1,6 +1,7 @@
 package com.lanou.service;
 
 import com.lanou.domain.hr.Department;
+import com.lanou.util.PageBean;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface DepartmentService {
     void save(Department department);
 
     void saveOrUpdate(Department department);
+
+    PageBean<Department> findByPage(int pageSize, int pageNum);
 }

@@ -70,50 +70,79 @@
     <td ><img src="${pageContext.request.contextPath}/images/result.gif"/></td>
   </tr>
 </table>
-
-<table width="100%" border="1" >
-  <tr class="henglan" style="font-weight:bold;">
-    <td width="10%" align="center">员工姓名</td>
-    <td width="6%" align="center">性别</td>
-    <td width="12%" align="center">入职时间</td>
-    <td width="15%" align="center">所属部门</td>
-    <td width="10%" align="center">职务</td>
-    <td width="10%" align="center">编辑</td>
-  </tr>
-
-	<s:iterator value="staffs" var="s">
-		<tr class="tabtd1">
-			<td align="center">${s.staffName}</td>
-			<td align="center">${s.gender}</td>
-			<td align="center">${s.onDutyDate}</td>
-			<td align="center">${s.post.department.depName}</td>
-			<td align="center">${s.post.postName}</td>
-			<td width="7%" align="center">
-				<a href="${pageContext.request.contextPath}/beforeUpdateStaff.action?staffID=${s.staffID}"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
-			</td>
-
+<form action="${pageContext.request.contextPath}/findStaff.action" method="post">
+	<table width="100%" border="1" >
+		<tr class="henglan" style="font-weight:bold;">
+			<td width="10%" align="center">员工姓名</td>
+			<td width="6%" align="center">性别</td>
+			<td width="12%" align="center">入职时间</td>
+			<td width="15%" align="center">所属部门</td>
+			<td width="10%" align="center">职务</td>
+			<td width="10%" align="center">编辑</td>
 		</tr>
-	</s:iterator>
 
-</table>
+		<s:iterator value="staffs" var="s">
+			<tr class="tabtd1">
+				<td align="center">${s.staffName}</td>
+				<td align="center">${s.gender}</td>
+				<td align="center">${s.onDutyDate}</td>
+				<td align="center">${s.post.department.depName}</td>
+				<td align="center">${s.post.postName}</td>
+				<td width="7%" align="center">
+					<a href="${pageContext.request.contextPath}/beforeUpdateStaff.action?staffID=${s.staffID}"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
+				</td>
 
+			</tr>
+		</s:iterator>
 
-<%-- 
-<table border="0" cellspacing="0" cellpadding="0" align="center">
-  <tr>
-    <td align="right">
-    	<span>第1/3页</span>
-        <span>
-        	<a href="#">[首页]</a>&nbsp;&nbsp;
-            <a href="#">[上一页]</a>&nbsp;&nbsp;
-            <a href="#">[下一页]</a>&nbsp;&nbsp;
-            <a href="#">[尾页]</a>
+		<s:iterator value="#pageBean.date" var="s">
+			<tr class="tabtd1">
+				<td align="center">${s.staffName}</td>
+				<td align="center">${s.gender}</td>
+				<td align="center">${s.onDutyDate}</td>
+				<td align="center">${s.post.department.depName}</td>
+				<td align="center">${s.post.postName}</td>
+				<td width="7%" align="center">
+					<a href="${pageContext.request.contextPath}/beforeUpdateStaff.action?staffID=${s.staffID}"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
+				</td>
+
+			</tr>
+		</s:iterator>
+	</table>
+	<input id="pageNum" name="pageNum" type="hidden" value="<s:property value="pageBean.pageNum"/>">
+</form>
+
+ <table border="0" cellspacing="0" cellpadding="0" align="center">
+	 <tr>
+		 <td align="right">
+			 <span>第<s:property value="#pageBean.pageNum"/>/<s:property value="#pageBean.totalPage"/>页</span>
+
+			 <span>
+                <s:if test="#pageBean.pageNum gt 1">
+					<a href="javascript:void(0)" onclick="showPage(1)">[首页]</a>&nbsp;&nbsp;
+					<a href="javascript:void(0)"
+					   onclick="showPage(<s:property value="#pageBean.pageNum - 1"/>)">[上一页]</a>&nbsp;&nbsp;
+				</s:if>
+
+                <s:if test="#pageBean.pageNum lt #pageBean.totalPage">
+                    <a href="javascript:void(0)"
+					   onclick="showPage(<s:property value="#pageBean.pageNum + 1"/>)">[下一页]</a>&nbsp;&nbsp;
+					<a href="javascript:void(0)" onclick="showPage(<s:property value="#pageBean.totalPage"/>)">[尾页]</a>
+				</s:if>
         </span>
-    </td>
-  </tr>
-</table>
---%>
+		 </td>
+	 </tr>
+ </table>
+
+
 <script>
+
+	function showPage(num) {
+		document.getElementById("pageNum").value = num;
+		document.forms[1].submit();
+	}
+
+
 	$(function () {
 		$.post("${pageContext.request.contextPath}/showDepartment.action",
 				null,

@@ -4,6 +4,7 @@ import com.lanou.domain.hr.Post;
 import com.lanou.domain.hr.Staff;
 import com.lanou.service.PostService;
 import com.lanou.service.StaffService;
+import com.lanou.util.PageBean;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
@@ -36,7 +37,22 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
     private String postID;
     private List<Post> posts;
     private List<Staff> staffs;
+    private String oldPassword;//原始密码
+    private String newPassword;//新密码
+    private String reNewPassword;//确认新密码
 
+    private int pageNum = 1; //第一次从第一页开始
+    private int pageSize =3; //每页显示三条数据
+
+    /**
+     * 分页查员工
+     * @return
+     */
+    public String findByPage(){
+        PageBean<Staff> pageBean = staffService.findByPage(pageNum,pageSize);
+        ActionContext.getContext().put("pageBean",pageBean);
+        return SUCCESS;
+    }
 
     /**
      * 查找所有员工
@@ -53,7 +69,6 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
      * @return
      */
     public String showStaff() {
-
         if (postID.equals("-1") && depID.equals("-1") && StringUtils.isBlank(staff.getStaffName())) {
             findStaff();
             return SUCCESS;
@@ -125,10 +140,8 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
      */
     public String login(){
         staffs = staffService.login(staff.getLoginName(), staff.getLoginPwd());
-        System.out.println(staffs);
-        ActionContext.getContext().getSession().put("name",staff.getStaffName());
-       // ServletActionContext.getRequest().getSession().setAttribute("name",staff.getStaffName());
         if (staffs.size()>0){
+            ServletActionContext.getRequest().getSession().setAttribute("loginStaff",staffs.get(0));
             return SUCCESS;
         }
         return ERROR;
@@ -151,8 +164,14 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
      * @return
      */
     public String editPassword(){
-
-        return SUCCESS;
+        staff = staffService.findById(staff.getStaffID());
+        if (staff.getLoginPwd().equals(oldPassword) && newPassword.equals(reNewPassword)){
+           staff.setLoginPwd(newPassword);
+           staffService.saveOrUpdate(staff);
+            return SUCCESS;
+        }
+       addActionError("密码有误请重新设置");
+        return ERROR;
     }
 
 
@@ -200,6 +219,46 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
 
     public void setPosts(List<Post> posts) {
         this.posts = posts;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public String getReNewPassword() {
+        return reNewPassword;
+    }
+
+    public void setReNewPassword(String reNewPassword) {
+        this.reNewPassword = reNewPassword;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 }
 
