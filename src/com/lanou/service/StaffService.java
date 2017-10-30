@@ -25,7 +25,7 @@ public interface StaffService {
 
     void update(Staff staff);
 
-    List<Staff> login(String loginName, String loginPwd);
+    List<Staff> login(String loginName);
 
     PageBean<Staff> findByPage(int pageNum, int pageSize);
 }

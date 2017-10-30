@@ -36,12 +36,11 @@ public class StaffDaoImpl extends BaseDaoImpl<Staff> implements StaffDao {
     }
 
     @Override
-    public List<Staff> login(String loginName, String loginPwd) {
+    public List<Staff> login(String loginName) {
         Session session = currentSession();
-        Query query = session.createQuery(" from Staff where loginName=:na and loginPwd=:psw");
+        Query query = session.createQuery(" from Staff where loginName=:na");
         //设置参数
         query.setParameter("na",loginName);
-        query.setParameter("psw",loginPwd);
         List<Staff> staffs = query.list();
         return staffs;
 

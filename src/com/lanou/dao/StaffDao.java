@@ -12,5 +12,5 @@ import java.util.Map;
 public interface StaffDao extends BaseDao<Staff> {
     List<Staff> findStaff(Map<String, Object> params);
 
-    List<Staff> login(String loginName, String loginPwd);
+    List<Staff> login(String loginName);
 }

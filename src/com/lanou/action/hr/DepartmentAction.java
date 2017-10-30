@@ -6,6 +6,7 @@ import com.lanou.util.PageBean;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -55,12 +56,15 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
 
     public String beforeUpdateDepName() {
         String depID = department.getDepID();
-        department = departmentService.findById(depID);
+        if (!StringUtils.isBlank(depID)){
+            department = departmentService.findById(depID);
+            return SUCCESS;
+        }
         return SUCCESS;
     }
 
     /**
-     *  编辑,添加部门
+     * 只有管理员才有权限 编辑,添加部门
      * @return
      */
 
@@ -72,6 +76,8 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
 
         return SUCCESS;
     }
+
+
 
     @Override
     public Department getModel() {

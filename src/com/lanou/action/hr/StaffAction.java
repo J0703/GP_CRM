@@ -4,6 +4,7 @@ import com.lanou.domain.hr.Post;
 import com.lanou.domain.hr.Staff;
 import com.lanou.service.PostService;
 import com.lanou.service.StaffService;
+import com.lanou.util.CipherUtil;
 import com.lanou.util.PageBean;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -110,6 +111,11 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
         return SUCCESS;
     }
 
+    public String beforeAddStaff(){
+        return SUCCESS;
+
+    }
+
     /**
      * 编辑员工
      *
@@ -130,6 +136,10 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
     public String addStaff() {
         Post post = postService.findById(postID);
         staff.setPost(post);
+        //加密 密码
+        CipherUtil cipherUtil = new CipherUtil();
+        String passwprd = cipherUtil.generatePasswprd(staff.getLoginPwd());
+        staff.setLoginPwd(passwprd);
         staffService.save(staff);
         return SUCCESS;
     }
@@ -139,8 +149,10 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
      * @return
      */
     public String login(){
-        staffs = staffService.login(staff.getLoginName(), staff.getLoginPwd());
-        if (staffs.size()>0){
+        staffs = staffService.login(staff.getLoginName());
+        CipherUtil cipherUtil = new CipherUtil();
+        //验证输入的密码是否正确
+        if (cipherUtil.validatePasword(staffs.get(0).getLoginPwd(),staff.getLoginPwd()) ){
             ServletActionContext.getRequest().getSession().setAttribute("loginStaff",staffs.get(0));
             return SUCCESS;
         }
@@ -165,13 +177,17 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
      */
     public String editPassword(){
         staff = staffService.findById(staff.getStaffID());
-        if (staff.getLoginPwd().equals(oldPassword) && newPassword.equals(reNewPassword)){
-           staff.setLoginPwd(newPassword);
+        CipherUtil cipher = new CipherUtil();
+       String old =  cipher.generatePasswprd(oldPassword);
+        if (staff.getLoginPwd().equals(old) && newPassword.equals(reNewPassword)){
+           staff.setLoginPwd(cipher.generatePasswprd(newPassword));
            staffService.saveOrUpdate(staff);
-            return SUCCESS;
+           return SUCCESS;
+        }else {
+            addActionError("密码有误请重新设置");
+            return ERROR;
         }
-       addActionError("密码有误请重新设置");
-        return ERROR;
+
     }
 
 

@@ -50,8 +50,8 @@ public class StaffServiceImpl implements StaffService {
     }
 
     @Override
-    public List<Staff> login(String loginName, String loginPwd) {
-       return staffDao.login(loginName,loginPwd);
+    public List<Staff> login(String loginName) {
+       return staffDao.login(loginName);
 
     }
 

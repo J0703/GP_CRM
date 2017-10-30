@@ -10,11 +10,14 @@
 	<style>
 		.updpwd{
 			background-color: #2ae;
+			margin-top: 7%;
+
 		}
+
 		.login_btn{
 			background-color: #9be;
 			width: 99px;
-			font-size: 14px;
+			font-size: 13px;
 			border-radius: 10%;
 			font-family: 微软雅黑;
 		}
@@ -34,11 +37,12 @@
 	</script>
 </head>
 
-<body class="updpwd">
+<body class="updpwd" leftMargin=0 topMargin=0 marginwidth="0" marginheight="0">
+<div id="div1" align="center">
 	<form action="${pageContext.request.contextPath}/editPassword.action?staffID=${loginStaff.staffID}" method="post">
-		<table style="width: 200px">
+		<table style="width: 210px">
 			<tr>
-				<td colspan="2">
+				<td colspan="3">
 					<span id="msgId" class="upd_pwd_msg"> </span>
 				</td>
 			</tr>
@@ -55,7 +59,7 @@
 				<td><input type="password" name="reNewPassword" value="" /></td>
 			</tr>
 			<tr>
-				<td colspan="2">
+				<td colspan="5">
 					<input type="submit"  value="修改" class="login_btn"/><br/>
 
 					<button type="reset" value="重置" class="login_btn">重置</button>
@@ -65,5 +69,7 @@
 			</tr>
 		</table>
 	</form>
+</div>
+
 </body>
 </html>

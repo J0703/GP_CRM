@@ -32,7 +32,7 @@
 				<button type="submit"><a href="javascript:void(0)" onclick="condition()"><img src="${pageContext.request.contextPath}/images/button/gaojichaxun.gif" /></a></button>
 
 				<%--员工注入 --%>
-				<a href="${pageContext.request.contextPath}/selectStaffDepartmentAdd.action">
+				<a href="${pageContext.request.contextPath}/beforeAddStaff.action">
 					<img src="${pageContext.request.contextPath}/images/button/tianjia.gif" />
 				</a>
 

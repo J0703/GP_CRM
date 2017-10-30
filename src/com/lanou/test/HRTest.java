@@ -3,6 +3,7 @@ package com.lanou.test;
 import com.lanou.domain.hr.Department;
 import com.lanou.domain.hr.Post;
 import com.lanou.domain.hr.Staff;
+import com.lanou.util.CipherUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,6 +16,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by dllo on 17/10/24.
@@ -105,5 +107,25 @@ public class HRTest {
         System.out.println(lists);
         transaction.commit();
     }
+
+    @Test
+    public  void cipher(){
+        String pw1 = "123";
+        String pw2="";
+        CipherUtil cipherUtil = new CipherUtil();
+       pw2 = cipherUtil.generatePasswprd(pw1);
+        System.out.println("加密后" + pw2);
+
+        if (cipherUtil.validatePasword(pw2,pw1)){
+            System.out.println("true");
+        }else {
+            System.out.println("false");
+        }
+
+        UUID uuid = UUID.randomUUID();
+        System.out.println(uuid.toString());
+    }
+
+
 
 }

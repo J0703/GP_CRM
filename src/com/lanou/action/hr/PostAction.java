@@ -7,6 +7,7 @@ import com.lanou.util.PageBean;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -51,14 +52,22 @@ public class PostAction extends ActionSupport implements ModelDriven<Post>{
         return SUCCESS;
     }
 
+    public String showPost(){
+         posts = postService.findPostById(depID);
+        return SUCCESS;
+    }
+
     /**
      * 编辑时,职务回显
      * 根据id查到所属职务
      * @return
      */
     public String beforeUpdatePost() {
-        post = postService.findById(post.getPostID());
-        return SUCCESS;
+        if (!StringUtils.isBlank(post.getPostID())){
+            post = postService.findById(post.getPostID());
+            return SUCCESS;
+        }
+       return SUCCESS;
     }
 
     /**
