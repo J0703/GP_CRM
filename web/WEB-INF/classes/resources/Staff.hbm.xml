@@ -1,0 +1,21 @@
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.lanou.domain.hr.Staff">
+        <id name="staffID">
+            <generator class="uuid"/>
+        </id>
+        <property name="loginName"/>
+        <property name="loginPwd"/>
+        <property name="staffName"/>
+        <property name="gender"/>
+        <property name="onDutyDate"/>
+
+
+        <many-to-one name="post"
+                     lazy="false"
+                     column="postID"
+                     cascade="save-update"/>
+    </class>
+</hibernate-mapping>

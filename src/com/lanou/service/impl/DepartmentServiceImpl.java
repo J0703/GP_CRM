@@ -12,12 +12,22 @@ import java.util.List;
  */
 public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentDao departmentDao;
+
+    /**
+     * 找到所有的部门
+     * @return
+     */
     @Override
     public List<Department> findAll() {
         String hql = "from Department";
         return departmentDao.findAll(hql);
     }
 
+    /**
+     * 根据id找到部门
+     * @param depID : 部门id
+     * @return
+     */
     @Override
     public Department findById(String depID) {
 
@@ -26,21 +36,39 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     }
 
+    /**
+     * 更新部门
+     * @param department
+     */
     @Override
     public void update(Department department) {
         departmentDao.update(department);
     }
 
+    /**
+     * 保存新的部门
+     * @param department
+     */
     @Override
     public void save(Department department) {
         departmentDao.save(department);
     }
 
+    /**
+     * 部门存在则更新数据,不存在则创建id保存数据
+     * @param department
+     */
     @Override
     public void saveOrUpdate(Department department) {
         departmentDao.saveOrUpdate(department);
     }
 
+    /**
+     * 分页显示部门
+     * @param pageSize : 每页显示的数据(3条)
+     * @param pageNum : 从第几页开始显示,第一次=1
+     * @return
+     */
     @Override
     public PageBean<Department> findByPage(int pageSize, int pageNum) {
         //查找部门的个数语句
@@ -51,7 +79,6 @@ public class DepartmentServiceImpl implements DepartmentService {
         PageBean<Department> pageBean = new PageBean<>(pageNum,pageSize,totalRecord);
         //从起始位置到查询的条数 的 部门
         List<Department> data =  departmentDao.findPageAll(hql1,pageBean.getStartIndex(),pageBean.getPageSize());
-        System.out.println(data);
         pageBean.setDate(data);
         return pageBean;
     }

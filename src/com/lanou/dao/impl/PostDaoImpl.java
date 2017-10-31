@@ -12,7 +12,10 @@ import org.hibernate.Session;
 
 public class PostDaoImpl extends BaseDaoImpl<Post> implements PostDao  {
 
-//    //职务编辑
+    /**
+     * 更新职务
+     * @param post
+     */
     @Override
     public void saveOrUpdate(Post post) {
         Session session=currentSession();

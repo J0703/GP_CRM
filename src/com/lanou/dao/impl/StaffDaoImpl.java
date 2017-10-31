@@ -14,7 +14,11 @@ import java.util.Map;
  */
 public class StaffDaoImpl extends BaseDaoImpl<Staff> implements StaffDao {
 
-
+    /**
+     * 高级查询
+     * @param params 查询条件
+     * @return
+     */
     @Override
     public List<Staff> findStaff(Map<String, Object> params) {
         Object postId = params.get("postId");
@@ -35,6 +39,11 @@ public class StaffDaoImpl extends BaseDaoImpl<Staff> implements StaffDao {
         return super.find(stringBuffer.toString(),params);
     }
 
+    /**
+     * 登录
+     * @param loginName 登录名字
+     * @return 对应登录名字的员工
+     */
     @Override
     public List<Staff> login(String loginName) {
         Session session = currentSession();

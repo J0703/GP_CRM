@@ -7,9 +7,9 @@ import java.util.Set;
  * Created by dllo on 17/10/24.
  */
 public class Department {
-    private String depID;
-    private String depName;
-    private Set<Post> posts= new HashSet<>();
+    private String depID; //部门id
+    private String depName; //部门名字
+    private Set<Post> posts= new HashSet<>(); //部门下对应的职务
 
 
     public Department(String depName) {

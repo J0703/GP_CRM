@@ -9,7 +9,12 @@ import org.apache.struts2.ServletActionContext;
  * Created by dllo on 17/10/30.
  */
 public class SaveOrUpdateInterceptor extends MethodFilterInterceptor{
-
+    /**
+     * 拦截,只有用户名为666的员工可以操作
+     * @param actionInvocation
+     * @return
+     * @throws Exception
+     */
     @Override
     protected String doIntercept(ActionInvocation actionInvocation) throws Exception {
         Staff staff = (Staff) ServletActionContext.getRequest().getSession().getAttribute("loginStaff");

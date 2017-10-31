@@ -61,7 +61,19 @@ public interface BaseDao<T> {
      */
     void saveOrUpdate(T t);
 
+    /**
+     * 得到总条数
+     * @param hql 查询语句
+     * @return
+     */
     int getTotalRecord(String hql);
 
+    /**
+     * 查询数据
+     * @param hql1 查询语句
+     * @param startIndex 索引位置
+     * @param pageSize 索引条数
+     * @return
+     */
     List<T> findPageAll(String hql1, int startIndex, int pageSize);
 }

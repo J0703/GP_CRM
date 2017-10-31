@@ -4,9 +4,9 @@ package com.lanou.domain.hr;
  * Created by dllo on 17/10/24.
  */
 public class Post {
-    private String postID;
-    private String postName;
-    private Department department;
+    private String postID; //职务id
+    private String postName; //职务名称
+    private Department department; //职务对应的部门
 
     public Post(String postID, String postName) {
         this.postID = postID;

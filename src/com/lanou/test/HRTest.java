@@ -14,6 +14,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -31,8 +33,6 @@ public class HRTest {
         context = new ClassPathXmlApplicationContext("spring-config.xml");
 
     }
-
-
     @Test
     public void saveHR(){
         SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
@@ -125,7 +125,7 @@ public class HRTest {
         UUID uuid = UUID.randomUUID();
         System.out.println(uuid.toString());
     }
-
-
-
 }
+
+
+

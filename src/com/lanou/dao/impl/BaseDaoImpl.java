@@ -100,7 +100,11 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
     }
 
 
-
+    /**
+     * 查询个数
+     * @param hql 查询语句
+     * @return
+     */
     @Override
     public int getTotalRecord(String hql) {
         //返回所有对象
@@ -111,6 +115,13 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
         return 0;
     }
 
+    /**
+     * 查询到的数据
+     * @param hql1 查询语句
+     * @param startIndex 查询的起始位置
+     * @param pageSize 查询的条数
+     * @return
+     */
     @Override
     public List<T> findPageAll(String hql1, int startIndex, int pageSize) {
         return this.getHibernateTemplate().execute(new PageHibernateCallback<T>(hql1,startIndex,pageSize));

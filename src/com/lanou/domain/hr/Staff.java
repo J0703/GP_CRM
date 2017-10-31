@@ -6,14 +6,14 @@ import java.util.Date;
  * Created by dllo on 17/10/24.
  */
 public class Staff {
-    private String staffID;
-    private String loginName;
-    private String loginPwd;
-    private String staffName;
-    private String gender;
-    private Date onDutyDate;
-    private Department department;//部门
-    private Post post;//职务
+    private String staffID; //员工id
+    private String loginName; //登录名字
+    private String loginPwd; //登录密码
+    private String staffName; //员工名字
+    private String gender; //员工性别
+    private Date onDutyDate; //入职日期
+    private Department department;//所属部门
+    private Post post;//所属职务
 
 
     public Staff() {

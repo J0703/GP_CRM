@@ -14,6 +14,11 @@ import java.util.Map;
  */
 public class StaffServiceImpl implements StaffService {
     private StaffDao staffDao;
+
+    /**
+     * 找到所有的员工
+     * @return
+     */
     @Override
     public List<Staff> findAll() {
         String hql = "from Staff";
@@ -21,6 +26,11 @@ public class StaffServiceImpl implements StaffService {
 
     }
 
+    /**
+     * 根据条件查询
+     * @param params 查询参数
+     * @return
+     */
     @Override
     public List<Staff> findStaff(Map<String, Object> params) {
        return staffDao.findStaff(params);
@@ -28,33 +38,61 @@ public class StaffServiceImpl implements StaffService {
 
     }
 
+    /**
+     * 根据id查询
+     * @param staffID 职员id
+     * @return
+     */
     @Override
     public Staff findById(String staffID) {
         return staffDao.findById(staffID,Staff.class);
 
     }
 
+    /**
+     * 保存职员
+     * @param staff
+     */
     @Override
     public void save(Staff staff) {
         staffDao.save(staff);
     }
 
-    @Override
-    public void saveOrUpdate(Staff staff) {
-        staffDao.saveOrUpdate(staff);
-    }
-
+    /**
+     * 更新职员
+     * @param staff
+     */
     @Override
     public void update(Staff staff) {
         staffDao.update(staff);
     }
 
+    /**
+     * 职员存在则更新 不存在则保存
+     * @param staff
+     */
+    @Override
+    public void saveOrUpdate(Staff staff) {
+        staffDao.saveOrUpdate(staff);
+    }
+
+    /**
+     * 登录
+     * @param loginName 登录名字
+     * @return
+     */
     @Override
     public List<Staff> login(String loginName) {
        return staffDao.login(loginName);
 
     }
 
+    /**
+     * 分页查找
+     * @param pageNum 索引位置
+     * @param pageSize 索引条数
+     * @return
+     */
     @Override
     public PageBean<Staff> findByPage(int pageNum, int pageSize) {
         String hql = "select count(*) from Staff";
