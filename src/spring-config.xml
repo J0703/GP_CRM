@@ -87,6 +87,15 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+    <bean id="classesDao"
+          class="com.lanou.dao.impl.ClassesDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="courseTypeDao"
+          class="com.lanou.dao.impl.CourseTypeDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
     <!--配置service层-->
     <bean id="departmentService"
           class="com.lanou.service.impl.DepartmentServiceImpl">
@@ -101,5 +110,15 @@
     <bean id="staffService"
           class="com.lanou.service.impl.StaffServiceImpl">
         <property name="staffDao" ref="staffDao"/>
+    </bean>
+
+    <bean id="classesService"
+          class="com.lanou.service.impl.ClassesServiceImpl">
+        <property name="classesDao" ref="classesDao"/>
+    </bean>
+
+    <bean id="courseTypeService"
+          class="com.lanou.service.impl.CourseTypeServiceImpl">
+        <property name="courseTypeDao" ref="courseTypeDao"/>
     </bean>
 </beans>

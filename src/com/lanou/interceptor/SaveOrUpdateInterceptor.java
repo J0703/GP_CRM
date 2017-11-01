@@ -1,6 +1,7 @@
 package com.lanou.interceptor;
 
 import com.lanou.domain.hr.Staff;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 import org.apache.struts2.ServletActionContext;
@@ -17,7 +18,8 @@ public class SaveOrUpdateInterceptor extends MethodFilterInterceptor{
      */
     @Override
     protected String doIntercept(ActionInvocation actionInvocation) throws Exception {
-        Staff staff = (Staff) ServletActionContext.getRequest().getSession().getAttribute("loginStaff");
+        //Staff staff = (Staff) ServletActionContext.getRequest().getSession().getAttribute("loginStaff");
+        Staff staff = (Staff) ActionContext.getContext().getApplication().get("loginStaff");
         System.out.println(staff);
         if (!staff.getStaffName().equals("666")){
             return "reject";

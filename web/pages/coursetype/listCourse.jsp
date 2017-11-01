@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -75,31 +76,20 @@
     <td width="18%" align="center">收费标准</td>
 	<td width="11%" align="center">编辑</td>
   </tr>
-  <%--数据展示，单行：tabtd1；双行：tabtd2 --%>
-   <tr class="tabtd1">
-	    <td align="center">JavaEE </td>
-	    <td align="center"> </td>
-	    <td align="center">1000</td>
-	    <td align="center">3000.0</td>
-	  	<td width="11%" align="center">
-	  		
-	  		<a href="${pageContext.request.contextPath}/pages/coursetype/addOrEditCourse.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
-	  	</td>
-	  </tr>
-  
- 
-	  <tr class="tabtd2">
-	    <td align="center">JavaEE </td>
-	    <td align="center"> </td>
-	    <td align="center">6000</td>
-	    <td align="center">18000.0</td>
-	  	<td width="11%" align="center">
-	  		
-	  		<a href="${pageContext.request.contextPath}/pages/coursetype/addOrEditCourse.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
-	  	</td>
-	  </tr>
+	<s:iterator value="courseTypeList" var="ct">
+		<tr class="tabtd1">
+			<td align="center">${ct.courseName}</td>
+			<td align="center">${ct.remark}</td>
+			<td align="center">${ct.total}</td>
+			<td align="center">${ct.courseCost}</td>
+			<td width="11%" align="center">
 
- 
+				<a href="${pageContext.request.contextPath}/pages/coursetype/addOrEditCourse.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
+			</td>
+		</tr>
+	</s:iterator>
+  <%--数据展示，单行：tabtd1；双行：tabtd2 --%>
+
 </table>
 <table border="0" cellspacing="0" cellpadding="0" align="center">
   <tr>

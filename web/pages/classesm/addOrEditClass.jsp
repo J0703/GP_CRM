@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -32,7 +33,7 @@
   </tr>
 </table>
 
-<form action="${pageContext.request.contextPath}/pages/classesm/listClass.jsp" method="post">
+<form action="${pageContext.request.contextPath}/saveClasses.action" method="post">
 	
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	  <tr>
@@ -40,10 +41,11 @@
 	    <td width="20%"><input type="text" name="name" value=""/> </td>
 	    <td width="8%">所属类别：</td>
 	    <td width="62%">
-	    	<select name="crmCourseType.courseTypeId">
-			    <option value="">---请选择---</option>
-			    <option value="ee050687bd1a4455a153d7bbb7000008">JavaEE</option>
-			    <option value="ee050687bd1a4455a153d7bbb7000009">大数据</option>
+	    	<select name="courseTypeId">
+			    <option value="-1">---请选择---</option>
+			   <s:iterator value="courseTypeList" var="ct">
+				   <option value="${ct.courseTypeId}">${ct.courseName}</option>
+			   </s:iterator>
 			</select>
 		</td>
 	  </tr>

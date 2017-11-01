@@ -153,7 +153,8 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
         CipherUtil cipherUtil = new CipherUtil();
         //验证输入的密码是否正确
         if (cipherUtil.validatePasword(staffs.get(0).getLoginPwd(),staff.getLoginPwd()) ){
-            ServletActionContext.getRequest().getSession().setAttribute("loginStaff",staffs.get(0));
+           // ServletActionContext.getRequest().getSession().setAttribute("loginStaff",staffs.get(0));
+            ActionContext.getContext().getApplication().put("loginStaff",staffs.get(0));
             return SUCCESS;
         }
         return ERROR;

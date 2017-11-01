@@ -7,9 +7,11 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
-<!--配置注解的扫描的跟路径-->
+
+    <!--配置注解的扫描的跟路径-->
     <cotext:component-scan base-package="com.lanou"/>
-    <!--配置hibernate-->
+
+    <!--1.配置hibernate-->
     <bean id="dataSource"
           class="org.apache.commons.dbcp.BasicDataSource">
         <!--数据库驱动文件-->
@@ -34,6 +36,7 @@
                 <prop key="hibernate.format_sql">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <!--如果sessionFactory交给spring管理,同时还引入了Spring中的事物切面,则将这句话注释掉,但是测试的时候要打开,否则不能创建数据库和添加数据-->
                 <!--<prop key="hibernate.current_session_context_class">thread</prop>-->
             </props>
         </property>
@@ -41,6 +44,7 @@
         <!--3.加载实体类Hibernate的映射文件
             自动匹配resource目录下所有.hbm.xml后缀文件-->
         <property name="mappingLocations" value="classpath*:resources/*.hbm.xml"/>
+
     </bean>
     <!--4.配置事物对象(切面)-->
     <bean id="transactionManager"
@@ -58,6 +62,7 @@
             <tx:method name="*"/>
         </tx:attributes>
     </tx:advice>
+
     <!--6.配置切面编程-->
     <aop:config>
         <!--配置切入点-->
@@ -82,6 +87,15 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+    <bean id="classesDao"
+          class="com.lanou.dao.impl.ClassesDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="courseTypeDao"
+          class="com.lanou.dao.impl.CourseTypeDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
     <!--配置service层-->
     <bean id="departmentService"
           class="com.lanou.service.impl.DepartmentServiceImpl">
@@ -96,5 +110,15 @@
     <bean id="staffService"
           class="com.lanou.service.impl.StaffServiceImpl">
         <property name="staffDao" ref="staffDao"/>
+    </bean>
+
+    <bean id="classesService"
+          class="com.lanou.service.impl.ClassesServiceImpl">
+        <property name="classesDao" ref="classesDao"/>
+    </bean>
+
+    <bean id="courseTypeService"
+          class="com.lanou.service.impl.CourseTypeServiceImpl">
+        <property name="courseTypeDao" ref="courseTypeDao"/>
     </bean>
 </beans>
