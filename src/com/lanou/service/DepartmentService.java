@@ -20,4 +20,6 @@ public interface DepartmentService {
     void saveOrUpdate(Department department);
 
     PageBean<Department> findByPage(int pageSize, int pageNum);
+
+    Department findByName(String depName);
 }

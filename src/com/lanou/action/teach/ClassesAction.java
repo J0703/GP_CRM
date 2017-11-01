@@ -1,4 +1,4 @@
-package com.lanou.action.tr;
+package com.lanou.action.teach;
 
 import com.lanou.domain.tr.Classes;
 import com.lanou.domain.tr.CourseType;

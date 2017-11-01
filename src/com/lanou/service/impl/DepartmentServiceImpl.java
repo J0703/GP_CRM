@@ -4,8 +4,11 @@ import com.lanou.dao.DepartmentDao;
 import com.lanou.domain.hr.Department;
 import com.lanou.service.DepartmentService;
 import com.lanou.util.PageBean;
+import freemarker.ext.beans.HashAdapter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by dllo on 17/10/25.
@@ -81,6 +84,15 @@ public class DepartmentServiceImpl implements DepartmentService {
         List<Department> data =  departmentDao.findPageAll(hql1,pageBean.getStartIndex(),pageBean.getPageSize());
         pageBean.setDate(data);
         return pageBean;
+    }
+
+    @Override
+    public Department findByName(String depName) {
+        String hql ="from Department where depName=:name";
+        Map<String,Object> params = new HashMap<>();
+        params.put("name",depName);
+       return departmentDao.findSingle(hql,params);
+
     }
 
 

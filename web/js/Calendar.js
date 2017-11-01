@@ -47,13 +47,13 @@ return str;
 };
 Calendar.prototype.getHeader = function()
 {
-var str = '<table Author="alin" class="cdrHeader" cellSpacing="2" cellPadding="0"><tr Author="alin" align="center">\n';
+var str = '<table Author="alin" class="cdrHeader" cellSpacing="2" cellPadding="0"><teach Author="alin" align="center">\n';
 str += '<td Author="alin" onmouseover="this.className=\'headerOver\'" onmouseout="this.className=\'\'" id="previousYear" title="上一年份" style="cursor:pointer;width:10px;" onclick="'+this.Obj+'.onChangeYear(false);"><<</td>\n';
 str += '<td Author="alin" onmouseover="this.className=\'headerOver\'" onmouseout="this.className=\'\'" id="previousMonth" title="上一月份" style="cursor:pointer;width:10px;" onclick="'+this.Obj+'.onChangeMonth(false);"><</td>\n';
 str += '<td Author="alin" onmouseover="this.className=\'headerOver\'" id="currentYear" style="width:50px;" onclick="' + this.Obj + '.showMenu(true);" onmouseout="' + this.Obj + '.hideMenu();this.className=\'\';">0</td>\n';
 str += '<td Author="alin" onmouseover="this.className=\'headerOver\'" id="currentMonth" onclick="' + this.Obj + '.showMenu(false);" onmouseout="' + this.Obj + '.hideMenu();this.className=\'\';">0</td>\n';
 str += '<td Author="alin" onmouseover="this.className=\'headerOver\'" onmouseout="this.className=\'\'" id="nextMonth" title="下一月份" style="cursor:pointer;width:10px;" onclick="'+this.Obj+'.onChangeMonth(true);">></td>\n';
-str += '<td Author="alin" onmouseover="this.className=\'headerOver\'" onmouseout="this.className=\'\'" id="nextYear" title="下一年份" style="cursor:pointer;width:10px;" onclick="'+this.Obj+'.onChangeYear(true);">>></td></tr>\n';
+str += '<td Author="alin" onmouseover="this.className=\'headerOver\'" onmouseout="this.className=\'\'" id="nextYear" title="下一年份" style="cursor:pointer;width:10px;" onclick="'+this.Obj+'.onChangeYear(true);">>></td></teach>\n';
 str += '</table>\n';
 return str;
 };
@@ -64,26 +64,26 @@ var str = this.getBodyBar();
 str += '<table Author="alin" class="cdrBody" cellSpacing="2" cellPadding="0">\n';   
 for(i = 0; i < 6; i++)
 {	  
-str += '<tr Author="alin" align="center">';
+str += '<teach Author="alin" align="center">';
 for(j = 0; j < 7; j++)
 {
 str += '<td Author="alin" class="dayOut" id="cdrDay'+(n++)+'" width="13%"></td>\n';
 }
-str += '</tr>';
+str += '</teach>';
 }
 str += '</table>\n';
-str += '<table Author="alin" class="cdrBodyBar" cellSpacing="2" cellPadding="0"><tr align="center" Author="alin"><td Author="alin" style="cursor:pointer;" onclick="'+this.Obj+'.getToday();">今天：'+new Date().toFormatString("yyyy年mm月dd日")+'</td></tr></table>\n';
+str += '<table Author="alin" class="cdrBodyBar" cellSpacing="2" cellPadding="0"><teach align="center" Author="alin"><td Author="alin" style="cursor:pointer;" onclick="'+this.Obj+'.getToday();">今天：'+new Date().toFormatString("yyyy年mm月dd日")+'</td></teach></table>\n';
 return str;
 };
 Calendar.prototype.getBodyBar = function()
 {
-var str = '<table Author="alin_bar" id="cdrBodyBar" class="cdrBodyBar" style="cursor:move;" cellSpacing="2" cellPadding="0"><tr Author="alin_bar" align="center">\n';
+var str = '<table Author="alin_bar" id="cdrBodyBar" class="cdrBodyBar" style="cursor:move;" cellSpacing="2" cellPadding="0"><teach Author="alin_bar" align="center">\n';
 var day = new Array('日','一','二','三','四','五','六');
 for(i = 0; i < 7; i++)
 {
 str += '<td Author="alin_bar">' + day[i] + '</td>\n';     
 }
-str += '</tr></table>';
+str += '</teach></table>';
 return str;  
 }
 Calendar.prototype.getYearMenu = function(year)
@@ -93,7 +93,7 @@ for(i = 0; i < 10; i++)
 {	  
 var _year = year + i;
 var _date = new Date(_year,this.date.getMonth(),this.date.getDate());
-str += '<tr Author="alin" align="center"><td Author="alin" width="13%" height="16" ';
+str += '<teach Author="alin" align="center"><td Author="alin" width="13%" height="16" ';
 if(this.date.getFullYear() != _year)
 {
 str += 'onmouseover="this.className=\'menuOver\'" onmouseout="this.className=\'\'" ';
@@ -103,12 +103,12 @@ else
 str += 'class="menuOver"';
 }
 str += 'onclick="' + this.Obj + '.bindDate(\'' + _date.toFormatString("-") + '\')">' + _year + '年</td>\n';		
-str += '</tr>';
+str += '</teach>';
 }
-str += '<tr Author="alin" align="center"><td Author="alin"><table Author="alin" style="font-size:12px;width:100%;" cellSpacing="0" cellPadding="0">\n';
-str += '<tr Author="alin" align="center"><td Author="alin" onmouseover="this.className=\'menuOver\'" onmouseout="this.className=\'\'" onclick="'+this.Obj+'.getYearMenu('+ (year - 10) + ')"><<</td>\n';
-str += '<td Author="alin" onmouseover="this.className=\'menuOver\'" onmouseout="this.className=\'\'" onclick="'+this.Obj+'.getYearMenu('+ (year + 10) +')">>></td><tr>\n';
-str += '</table></td></tr>\n';
+str += '<teach Author="alin" align="center"><td Author="alin"><table Author="alin" style="font-size:12px;width:100%;" cellSpacing="0" cellPadding="0">\n';
+str += '<teach Author="alin" align="center"><td Author="alin" onmouseover="this.className=\'menuOver\'" onmouseout="this.className=\'\'" onclick="'+this.Obj+'.getYearMenu('+ (year - 10) + ')"><<</td>\n';
+str += '<td Author="alin" onmouseover="this.className=\'menuOver\'" onmouseout="this.className=\'\'" onclick="'+this.Obj+'.getYearMenu('+ (year + 10) +')">>></td><teach>\n';
+str += '</table></td></teach>\n';
 str += '</table>';
 var _menu = getObjById("cdrMenu");
 _menu.innerHTML = str;
@@ -119,7 +119,7 @@ var str = '<table Author="alin" cellSpacing="0" class="cdrMenu" cellPadding="0">
 for(i = 1; i <= 12; i++)
 {   
 var _date = new Date(this.date.getFullYear(),i-1,this.date.getDate());		
-str += '</tr><tr Author="alin" align="center"><td Author="alin" height="16" ';
+str += '</teach><teach Author="alin" align="center"><td Author="alin" height="16" ';
 if(this.date.getMonth() + 1 != i)
 {
 str += 'onmouseover="this.className=\'menuOver\'" onmouseout="this.className=\'\'" ';
@@ -128,7 +128,7 @@ else
 {
 str += 'class="menuOver"';
 }
-str += 'onclick="' + this.Obj + '.bindDate(\'' + _date.toFormatString("-") + '\')">'+i+'月</td></tr>\n';
+str += 'onclick="' + this.Obj + '.bindDate(\'' + _date.toFormatString("-") + '\')">'+i+'月</td></teach>\n';
 }
 str += '</table>';
 var _menu = getObjById("cdrMenu");

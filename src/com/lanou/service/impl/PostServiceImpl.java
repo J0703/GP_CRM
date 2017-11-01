@@ -100,6 +100,15 @@ public class PostServiceImpl implements PostService {
         return pageBean;
     }
 
+    @Override
+    public Post findByName(String postName) {
+        String hql = "from Post where postName=:name";
+        Map<String,Object> params = new HashMap<>();
+        params.put("name",postName);
+       return   postDao.findSingle(hql,params);
+
+    }
+
     public PostServiceImpl(PostDao postDao) {
         this.postDao = postDao;
     }

@@ -22,4 +22,6 @@ public interface PostService {
     void saveOrUpdate(Post post);
 
     PageBean<Post> findByPage(int pageNum, int pageSize);
+
+    Post findByName(String postName);
 }

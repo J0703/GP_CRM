@@ -78,9 +78,9 @@ public class PostAction extends ActionSupport implements ModelDriven<Post>{
         Department department = departmentService.findById(depID);
         System.out.println(department);
         if (post.getPostID().equals("")){
-           post.setPostID(null);
-            post.setDepartment(department);
-            postService.save(post);
+            this.post.setPostID(null);
+            this.post.setDepartment(department);
+            postService.save(this.post);
        }else {
             post.setDepartment(department);
             postService.saveOrUpdate(post);

@@ -225,7 +225,7 @@ public class HRTest {
 
 
     @Test
-    public void utc() {
+    public void time() {
         String time ="2017-10-2";
         SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
         try {

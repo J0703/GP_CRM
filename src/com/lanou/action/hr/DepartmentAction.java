@@ -72,8 +72,7 @@ public class DepartmentAction extends ActionSupport implements ModelDriven<Depar
         if (department.getDepID().equals("")){
             department.setDepID(null);
         }
-        departmentService.saveOrUpdate(department);
-
+        departmentService.saveOrUpdate(this.department);
         return SUCCESS;
     }
 

@@ -167,9 +167,14 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
      */
 
     public void validateLogin() {
+        staffs = staffService.login(staff.getLoginName());
         if (StringUtils.isBlank(staff.getLoginName()) || StringUtils.isBlank(staff.getLoginPwd())){
             addActionError("用户名或密码不能为空,请重新输入!");
         }
+        if (staffs.size()==0){
+            addActionError("用户不存在");
+        }
+
     }
 
     /**
@@ -180,16 +185,26 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
         staff = staffService.findById(staff.getStaffID());
         CipherUtil cipher = new CipherUtil();
        String old =  cipher.generatePasswprd(oldPassword);
-        if (staff.getLoginPwd().equals(old) && newPassword.equals(reNewPassword)){
-           staff.setLoginPwd(cipher.generatePasswprd(newPassword));
-           staffService.saveOrUpdate(staff);
-           return SUCCESS;
-        }else {
-            addActionError("密码有误请重新设置");
+        if (!staff.getLoginPwd().equals(old)){
+            addActionError("原密码输入不正确");
+            return ERROR;
+        }
+        if (StringUtils.isBlank(newPassword) || StringUtils.isBlank(reNewPassword)){
+            addActionError("新密码不能为空");
             return ERROR;
         }
 
-    }
+        if (!newPassword.equals(reNewPassword)){
+            addActionError("两次密码输入不一致");
+            return ERROR;
+        }
+        if (staff.getLoginPwd().equals(old) && newPassword.equals(reNewPassword))
+        staff.setLoginPwd(cipher.generatePasswprd(newPassword));
+        staffService.saveOrUpdate(staff);
+        return SUCCESS;
+        }
+
+
 
 
     @Override
